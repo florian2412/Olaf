@@ -1,0 +1,28 @@
+md-content.md-padding
+  md-card
+    md-toolbar.md-table-toolbar.md-default
+      .md-toolbar-tools
+        span Gestion des comptes utilisateurs
+        .flex(flex)
+        button.md-icon-button.md-button.md-ink-ripple(ng-click="adminUsers.showAddUserDialog($event)")
+          md-icon.material-icons add_box
+            md-tooltip(md-direction="bottom") Ajouter
+    md-table-container
+      table(md-table md-row-select multiple ng-model="selected" md-progress="promise")
+        thead(md-head)
+          tr(md-row)
+            th(md-column) Email
+            th(md-column) Nom
+            th(md-column) Administrateur
+            th(md-column)
+        tbody(md-body)
+          tr(md-row ng-repeat="user in adminUsers.users | orderBy: adminUsers.table.query.order | limitTo: adminUsers.table.query.limit : (adminUsers.table.query.page -1) * adminUsers.table.query.limit")
+            td(md-cell) {{user.email}}
+            td(md-cell) {{user.name}}
+            td(md-cell)
+              md-checkbox(aria-label="Administrateur" ng-model="user.role" ng-true-value="'admin'" ng-disabled="true")
+            td(md-cell class="delete-user")
+              md-icon(md-font-library="material-icons" ng-click="adminUsers.showConfirmDialog(user, $event)") delete
+                md-tooltip(md-direction="bottom") Supprimer
+                md-tooltip(md-direction="bottom") Modifier le mot de passe
+    md-table-pagination(md-limit="adminUsers.table.query.limit" md-limit-options="adminUsers.table.limitOptions" md-page="adminUsers.table.query.page" md-total="{{adminUsers.users.length}}" md-page-select)

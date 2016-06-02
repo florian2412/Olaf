@@ -1,0 +1,33 @@
+form(name="settingsForm" ng-submit="settings.changePassword(settingsForm)" no-validate)
+  div(layout="column", layout-align="center center", layout-fill)
+    div(class="loginBox md-whiteframe-z1", layout="column")
+
+      md-toolbar.md-accent(ng-show="settings.erreurs")
+        h2.md-toolbar-tools
+          span {{settings.erreurs}}
+
+      md-content(class="md-padding", layout="column")
+        md-input-container
+          label Ancien mot de passe
+          input(type="password" ng-model="settings.user.oldPassword" name="oldPassword" required)
+          div(ng-messages="settingsForm.oldPassword.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+
+        md-input-container
+          label Nouveau mot de passe
+          input(type="password" ng-model="settings.user.newPassword" name="newPassword" ng-minlength="8" required)
+          div(ng-messages="settingsForm.newPassword.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+            div(ng-message="minlength") Le mot de passe doit faire plus de 8 caractères.
+
+        md-input-container
+          label Confirmation du nouveau mot de passe
+          input(type="password" ng-model="settings.user.confirmPassword" name="confirmPassword" match="settings.user.newPassword" minlength="8" required)
+          div(ng-messages="settingsForm.confirmPassword.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+            div(ng-message="match") Les deux mots de passe sont différents.
+            div(ng-message="minlength") Le mot de passe doit faire plus de 8 caractères.
+
+        div(layout="row" layout-align="center center" style="padding-top:20px;")
+          md-button(class="md-raised md-primary" type="submit" ng-disabled="settingsForm.$invalid")
+            span Valider

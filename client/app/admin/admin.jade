@@ -1,0 +1,4 @@
+md-content
+  md-tabs(md-dynamic-height md-border-bottom md-selected="admin.selectedTabs")
+    md-tab(ng-repeat="tab in admin.tabs" md-on-select="admin.switchTab($index)" label="{{tab.name}}")
+  div(ui-view="tab")

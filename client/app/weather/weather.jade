@@ -1,0 +1,34 @@
+md-content.md-padding
+  md-grid-list(md-cols-xs="1" md-cols-sm="1" md-cols-md="3" md-cols-gt-md="3" md-row-height="16:9" md-gutter="12px" md-gutter-gt-sm="8px")
+    md-grid-tile.weather(md-rowspan="1" md-colspan="1")
+      div.value {{weather.currentWeather.indoorTemp}}&ordm;C
+        md-grid-tile-footer
+          h3 Intérieur
+    md-grid-tile.weather(md-rowspan="1" md-colspan="1")
+      div.value {{weather.currentWeather.outdoorTemp}}&ordm;C
+        md-grid-tile-footer
+          h3 Extérieur
+    md-grid-tile.weather(md-rowspan="1" md-colspan="1")
+      div.value {{weather.currentWeather.pressure}}hPa
+        md-grid-tile-footer
+          h3 Pression
+
+  md-content(layout-padding)
+    div
+      form(name="searchWeather" ng-submit="weather.getWeather()")
+        div(layout="row" layout-align="center center")
+          md-input-container.md-input-has-placeholder
+            label Date de début
+            input(mdc-datetime-picker="" date="true" time="true" type="text" ng-model="weather.startDate" class=" md-input" format="DD/MM/YY HH:mm" cancel-text="Annuler" max-date="weather.endDate")
+          md-input-container.md-input-has-placeholder
+            label Date de fin
+            input(mdc-datetime-picker="" date="true" time="true" type="text" ng-model="weather.endDate" class=" md-input" format="DD/MM/YY HH:mm" cancel-text="Annuler" min-date="weather.startDate" max-date="weather.todayDate")
+        div(layout="row" layout-align="center center")
+          md-button(class="md-raised md-primary" type="submit" ng-disabled="searchWeather.$invalid")
+            span Rechercher
+
+  md-content(flex layout-padding)
+    #temperatureChart.chart
+    #pressureChart.chart
+
+  div(ng-repeat="t in weather.test") {{t}}

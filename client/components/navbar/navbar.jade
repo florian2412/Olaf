@@ -1,0 +1,32 @@
+md-toolbar
+  .md-toolbar-tools
+    md-button.md-icon-butto(aria-label="Settings" ng-click="nav.toggleSideNav()")
+      md-icon(md-font-library="material-icons") menu
+    h2
+      span Olaf
+    div(flex)
+    h2(ng-if="nav.isLoggedIn()") Bonjour {{nav.getUser().name}}
+    md-menu(ng-if="nav.isLoggedIn()")
+      md-button.md-icon-button(aria-label="Plus" ng-click="$mdOpenMenu($event)")
+        md-icon(md-font-library="material-icons") more_vert
+      md-menu-content(width="4")
+        md-menu-item
+          md-button(aria-label="Plus" ng-href="/logout")
+            md-icon(md-font-library="material-icons") lock
+            | Se déconnecter
+        md-menu-item
+          md-button(aria-label="Plus" ng-href="/settings")
+            md-icon(md-font-library="material-icons") vpn_key
+            | Changer de mot de passe
+div
+  section(layout="row" flex)
+    md-sidenav#menu-left.md-sidenav-left.md-whiteframe-z2(md-component-id="left" md-is-locked-open="$mdMedia('gt-md')")
+      md-content(layout-padding)
+        a.content-img(href="/" ng-click="nav.toggleSideNav()")
+          img(src="/assets/images/logo.png")
+        md-button(ng-href="/weather" ng-click="nav.toggleSideNav()" hide-gt-md)
+          md-icon(md-font-library="material-icons") wb_sunny
+          span Températures
+        md-button(ng-href="/admin" ng-click="nav.toggleSideNav()" ng-if="nav.isAdmin()" hide-gt-md)
+          md-icon(md-font-library="material-icons") settings
+          span Administration

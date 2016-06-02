@@ -1,0 +1,35 @@
+md-dialog-content.md-dialog-content
+  #addUsersDialog
+    h3 Ajouter un utilisateur
+    form(name="addUserForm" ng-submit="addUsers.addUser(addUserForm)" no-validate)
+      md-content(layout="column")
+        div(layout="row")
+          md-input-container.md-block(flex)
+            label Nom
+            input(type="text" ng-model="addUsers.user.name" name="name" required)
+            div(ng-messages="addUserForm.name.$error" role="alert")
+              div(ng-message="required") Ce champ est obligatoire.
+          md-input-container.md-block(flex)
+            label Rôle
+            md-select(ng-model="addUsers.user.role" name="role" required)
+              md-option(value="user") Utilisateur
+              md-option(value="admin") Administrateur
+            div(ng-messages="addUserForm.role.$error" role="alert")
+              div(ng-message="required") Ce champ est obligatoire.
+        md-input-container
+          label Email
+          input(type="email" ng-model="addUsers.user.email" name="email" required mongoose-error)
+          div(ng-messages="addUserForm.email.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+            div(ng-message="email") Veuillez entrer un email valide.
+            div(ng-message="mongoose") {{addUsers.errors.email}}
+        md-input-container
+          label Mot de passe
+          input(type="password" ng-model="addUsers.user.password" name="password" required ng-minlength="8" mongoose-error)
+          div(ng-messages="addUserForm.password.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+            div(ng-message="minlength") Le mot de passe doit faire 8 caractères minimum.
+            div(ng-message="mongoose") {{addUsers.errors.password}}
+        div(layout="row" layout-align="center center" style="padding-top:20px;")
+            md-button(class="md-raised md-primary" type="submit" ng-disabled="addUserForm.$invalid")
+              span Ajouter

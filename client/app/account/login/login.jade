@@ -1,0 +1,23 @@
+form(name="loginForm" ng-submit="login.login(loginForm)" no-validate)
+  div(layout="column", layout-align="center center", layout-fill)
+    div(class="loginBox md-whiteframe-z1", layout="column")
+      md-toolbar.md-accent(ng-show="login.erreurs")
+        h2.md-toolbar-tools
+          span {{login.erreurs}}
+      md-content(class="md-padding", layout="column")
+        md-input-container
+          label Email
+          input(type="email" ng-model="login.user.email" name="email" required)
+          div(ng-messages="loginForm.email.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+            div(ng-message="email") Veuillez entrer un email valide.
+
+        md-input-container
+          label Mot de passe
+          input(type="password" ng-model="login.user.password" name="password" required)
+          div(ng-messages="loginForm.password.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+
+        div(layout="row" layout-align="center center" style="padding-top:20px;")
+          md-button(class="md-raised md-primary" type="submit" ng-disabled="loginForm.$invalid")
+            span Connexion
