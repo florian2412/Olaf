@@ -4,7 +4,10 @@
 
 'use strict';
 
-import {EventEmitter} from 'events';
+import {
+  EventEmitter
+}
+from 'events';
 import Weather from './weather.model';
 var WeatherEvents = new EventEmitter();
 
@@ -13,8 +16,7 @@ WeatherEvents.setMaxListeners(0);
 
 // Model events
 var events = {
-  'save': 'save',
-  'remove': 'remove'
+  'save': 'save'
 };
 
 // Register the event emitter to the model events
@@ -24,7 +26,7 @@ for (var e in events) {
 }
 
 function emitEvent(event) {
-  return function(doc) {
+  return function (doc) {
     WeatherEvents.emit(event + ':' + doc._id, doc);
     WeatherEvents.emit(event, doc);
   }

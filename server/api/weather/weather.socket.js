@@ -7,7 +7,7 @@
 import WeatherEvents from './weather.events';
 
 // Model events to emit
-var events = ['save', 'remove'];
+var events = ['save'];
 
 export function register(socket) {
   // Bind model events to socket events
@@ -22,13 +22,13 @@ export function register(socket) {
 
 
 function createListener(event, socket) {
-  return function(doc) {
+  return function (doc) {
     socket.emit(event, doc);
   };
 }
 
 function removeListener(event, listener) {
-  return function() {
+  return function () {
     WeatherEvents.removeListener(event, listener);
   };
 }

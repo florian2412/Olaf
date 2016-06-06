@@ -11,7 +11,7 @@ export function init() {
     // Indoor Temperature
     new five.Thermometer({
       pin: 'A0',
-      freq: 10000,
+      freq: 100000,
       toCelsius: function (raw) {
         var CELSIUS_TO_KELVIN = 273.15;
         var adcres = 1023;
@@ -32,15 +32,15 @@ export function init() {
     new five.Thermometer({
       controller: 'DS18B20',
       pin: 2,
-      freq: 10000
+      freq: 100000
     }).on('data', function () {
       saveWeather('outdoorTemp', round(this.celsius));
     });
 
     // Pressure
     new five.Barometer({
-      controller: "BMP085",
-      freq: 10000
+      controller: 'BMP085',
+      freq: 100000
     }).on('data', function () {
       saveWeather('pressure', round(this.pressure * 10));
     });
