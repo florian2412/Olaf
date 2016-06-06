@@ -5,15 +5,17 @@ import request from 'supertest';
 
 var newWeather;
 
-describe('Weather API:', function() {
+describe('Weather API:', function () {
 
-  describe('GET /y', function() {
+  describe('GET /y/:start/:end', function () {
     var weathers;
+    var startDate;
+    var endDate;
 
-    beforeEach(function(done) {
+    beforeEach(function (done) {
       request(app)
-        .get('/y')
-        .expect(200)
+        .get('/y/' + startDate + '/' + endDate);
+      .expect(200)
         .expect('Content-Type', /json/)
         .end((err, res) => {
           if (err) {
@@ -24,14 +26,14 @@ describe('Weather API:', function() {
         });
     });
 
-    it('should respond with JSON array', function() {
+    it('should respond with JSON array', function () {
       expect(weathers).to.be.instanceOf(Array);
     });
 
   });
 
-  describe('POST /y', function() {
-    beforeEach(function(done) {
+  describe('POST /y', function () {
+    beforeEach(function (done) {
       request(app)
         .post('/y')
         .send({
@@ -49,17 +51,17 @@ describe('Weather API:', function() {
         });
     });
 
-    it('should respond with the newly created weather', function() {
+    it('should respond with the newly created weather', function () {
       expect(newWeather.name).to.equal('New Weather');
       expect(newWeather.info).to.equal('This is the brand new weather!!!');
     });
 
   });
 
-  describe('GET /y/:id', function() {
+  describe('GET /y/:id', function () {
     var weather;
 
-    beforeEach(function(done) {
+    beforeEach(function (done) {
       request(app)
         .get('/y/' + newWeather._id)
         .expect(200)
@@ -73,21 +75,21 @@ describe('Weather API:', function() {
         });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       weather = {};
     });
 
-    it('should respond with the requested weather', function() {
+    it('should respond with the requested weather', function () {
       expect(weather.name).to.equal('New Weather');
       expect(weather.info).to.equal('This is the brand new weather!!!');
     });
 
   });
 
-  describe('PUT /y/:id', function() {
+  describe('PUT /y/:id', function () {
     var updatedWeather;
 
-    beforeEach(function(done) {
+    beforeEach(function (done) {
       request(app)
         .put('/y/' + newWeather._id)
         .send({
@@ -96,7 +98,7 @@ describe('Weather API:', function() {
         })
         .expect(200)
         .expect('Content-Type', /json/)
-        .end(function(err, res) {
+        .end(function (err, res) {
           if (err) {
             return done(err);
           }
@@ -105,20 +107,20 @@ describe('Weather API:', function() {
         });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       updatedWeather = {};
     });
 
-    it('should respond with the updated weather', function() {
+    it('should respond with the updated weather', function () {
       expect(updatedWeather.name).to.equal('Updated Weather');
       expect(updatedWeather.info).to.equal('This is the updated weather!!!');
     });
 
   });
 
-  describe('DELETE /y/:id', function() {
+  describe('DELETE /y/:id', function () {
 
-    it('should respond with 204 on successful removal', function(done) {
+    it('should respond with 204 on successful removal', function (done) {
       request(app)
         .delete('/y/' + newWeather._id)
         .expect(204)
@@ -130,7 +132,7 @@ describe('Weather API:', function() {
         });
     });
 
-    it('should respond with 404 when weather does not exist', function(done) {
+    it('should respond with 404 when weather does not exist', function (done) {
       request(app)
         .delete('/y/' + newWeather._id)
         .expect(404)
