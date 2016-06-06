@@ -1,10 +1,6 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /y              ->  index
- * POST    /y              ->  create
- * GET     /y/:id          ->  show
- * PUT     /y/:id          ->  update
- * DELETE  /y/:id          ->  destroy
+ * GET     api/weather/:start/:end              ->  search
  */
 
 'use strict';
@@ -38,18 +34,12 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Weathers
-export function index(req, res) {
-  return Weather.find().exec()
-    .then(respondWithResult(res))
-    .catch(handleError(res));
-}
-
+// Get Weather datas between 2 dates
 export function search(req, res) {
   return Weather.find({
       date: {
-        $lte: new Date(parseInt(req.params.start)),
-        $gt: new Date(parseInt(req.params.end))
+        $lte: new Date(parseInt(req.params.end)),
+        $gt: new Date(parseInt(req.params.start))
       }
     }).exec()
     .then(respondWithResult(res))

@@ -24,11 +24,11 @@ md-content.md-padding
             label Date de fin
             input(mdc-datetime-picker="" date="true" time="true" type="text" ng-model="weather.endDate" class=" md-input" format="DD/MM/YY HH:mm" cancel-text="Annuler" min-date="weather.startDate" max-date="weather.todayDate")
         div(layout="row" layout-align="center center")
-          md-button(class="md-raised md-primary" type="submit" ng-disabled="searchWeather.$invalid")
+          md-button.md-raised.md-primary(type="submit" ng-disabled="searchWeather.$invalid")
             span Rechercher
+          md-button.md-raised(ng-click="weather.initDate()")
+            span Reinitialiser
 
   md-content(flex layout-padding)
-    #temperatureChart.chart
-    #pressureChart.chart
-
-  div(ng-repeat="t in weather.test") {{t}}
+    #temperatureChart.chart(ng-show="weather.weathers.indoorTemps.length || weather.weathers.outdoorTemps.length")
+    #pressureChart.chart(ng-show="weather.weathers.pressures.length")
