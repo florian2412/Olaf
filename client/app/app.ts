@@ -1,5 +1,8 @@
 'use strict';
 
+declare var Highcharts: any;
+declare var moment: any;
+
 angular.module('olafApp', [
   'olafApp.auth',
   'olafApp.constants',
