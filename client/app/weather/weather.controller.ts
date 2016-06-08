@@ -2,11 +2,11 @@
 
 class WeatherController {
 
-  private socket: Object;
-  private weather: Object;
-  private $mdToast: Object;
+  private socket: any;
+  private weather: any;
+  private $mdToast: any;
 
-  public weathers: Object[] = [];
+  public weathers: any;
   public currentWeather = {
     indoorTemp: Number,
     outdoorTemp: Number,
@@ -23,8 +23,8 @@ class WeatherController {
   public startDate: Date;
   public endDate: Date;
 
-  private temperatureChart = Object;
-  private pressureChart = Object;
+  private temperatureChart: any;
+  private pressureChart: any;
 
   constructor(socket, weather, $mdToast) {
     this.socket = socket;

@@ -6,8 +6,8 @@
         "target": "ES5"
     },
     "filesGlob": [
-        "client/{app,components}/**/!(*.spec).ts",
-        "typings/main.d.ts"
+        "client/{app,components,bower_components}/**/!(*.spec).ts",
+        "typings/main.d.ts",
     ],
     "files": [
         "client/app/account/account.ts",

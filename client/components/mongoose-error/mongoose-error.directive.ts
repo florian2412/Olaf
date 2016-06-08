@@ -8,7 +8,7 @@ angular.module('olafApp')
     return {
       restrict: 'A',
       require: 'ngModel',
-      link: function(scope, element, attrs, ngModel) {
+      link: function(scope: any, element: any, attrs: any, ngModel: any) {
         element.on('keydown', () => ngModel.$setValidity('mongoose', true));
       }
     };
