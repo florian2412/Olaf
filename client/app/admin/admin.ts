@@ -27,8 +27,8 @@ angular.module('olafApp')
       },
       authenticate: 'admin'
     })
-    .state('adminTelecommande', {
-      url: '/admin/telecommande',
+    .state('adminRemote', {
+      url: '/admin/remote',
       selectedTabs: 1,
       views: {
         '': {
@@ -36,10 +36,10 @@ angular.module('olafApp')
           controller: 'AdminController',
           controllerAs: 'admin',
         },
-        'tab@adminTelecommande': {
-          templateUrl: 'app/admin/telecommande/adminTelecommande.html',
-          controller: 'AdminTelecommandeController',
-          controllerAs: 'adminTelecommande',
+        'tab@adminRemote': {
+          templateUrl: 'app/admin/remote/adminRemote.html',
+          controller: 'AdminRemoteController',
+          controllerAs: 'adminRemote',
         }
       },
       authenticate: 'admin'

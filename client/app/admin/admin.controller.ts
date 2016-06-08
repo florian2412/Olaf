@@ -7,7 +7,7 @@ class AdminController {
     url: '/users'
   }, {
     name: 'Télécommande',
-    url: '/telecommande'
+    url: '/remote'
   }];
 
   $location = null;
