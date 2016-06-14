@@ -1,4 +1,10 @@
-# olaf
+# Olaf
+
+![alt tag](https://github.com/sylcastaing/olaf/blob/master/client/assets/images/logo.png)
+
+Olaf is a Web Application to build home automation system. You can get temperature information and control your devices (TV, box, and all IR components). Olaf implements also a TodoList to forget nothing ! 
+
+In the future, olaf is also a mobile application and you can control the application with your voice !  
 
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 3.7.3.
 
