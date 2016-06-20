@@ -37,9 +37,9 @@ angular.module('olafApp')
           controllerAs: 'admin',
         },
         'tab@adminRemote': {
-          templateUrl: 'app/admin/remote/adminRemote.html',
-          controller: 'AdminRemoteController',
-          controllerAs: 'adminRemote',
+          templateUrl: 'app/admin/remote/adminRemotes.html',
+          controller: 'AdminRemotesController',
+          controllerAs: 'adminRemotes',
         }
       },
       authenticate: 'admin'

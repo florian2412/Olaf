@@ -1,0 +1,47 @@
+md-sidenav.md-sidenav-right(md-component-id="add-button-sidenav")
+  md-toolbar.md-theme-light
+    h1 Ajouter un bouton
+  md-content
+
+md-button#add-button.md-fab.md-primary(aria-label="Ajouter un bouton")
+  md-tooltip(md-direction="left") Ajouter un nouveau bouton
+  md-icon.material-icons add
+
+md-content.md-padding
+  md-card.md-padding
+    form(name="addRemoteForm" ng-submit="adminRemotes.addRemote(addRemoteForm)" no-validate)
+      div.md-padding(layout="row" layout-align="center")
+        md-input-container(flex)
+          label Nom de la télécommande
+          input(type="text" name="remoteName" ng-model="adminRemotes.newRemote.name" required)
+          div(ng-messages="addRemoteForm.remoteName.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+        md-input-container(flex)
+          label Type
+          md-select(name="remoteType" ng-model="adminRemotes.newRemote.type" required)
+            md-option(value="IR") IR
+            md-option(value="Livebox") Livebox
+          div(ng-messages="addRemoteForm.remoteType.$error" role="alert")
+            div(ng-message="required") Ce champ est obligatoire.
+        div
+          md-button.md-raised(type="submit" ng-disabled="addRemoteForm.$invalid")
+            span Ajouter
+    md-tabs(md-dynamic-height md-border-bottom md-selected="adminRemotes.selectedIndex")
+      md-tab(ng-repeat="remote in adminRemotes.remotes | orderBy:'position'" label="{{remote.name}}")
+        md-content
+          md-toolbar
+            .md-toolbar-tools
+              h2 Télécommande de type {{ remote.type }}
+              span(flex)
+              md-button.md-fab.md-mini(aria-label="Reculer d'une position" ng-click="adminRemotes.backRemotePosition(remote)")
+                md-tooltip(md-direction="bottom") Reculer d'une position
+                md-icon.material-icons keyboard_arrow_left
+              md-button.md-fab.md-mini(aria-label="Avancer d'une position" ng-click="adminRemotes.nextRemotePosition(remote)")
+                md-tooltip(md-direction="bottom") Avancer d'une position
+                md-icon.material-icons keyboard_arrow_right
+              md-button.md-fab.md-mini(aria-label="Modifier" ng-click="adminRemotes.updateRemote(remote, $event)")
+                md-tooltip(md-direction="bottom") Modifier
+                md-icon.material-icons settings
+              md-button.md-fab.md-mini(aria-label="Supprimer" ng-click="adminRemotes.deleteRemote(remote, $event)")
+                md-tooltip(md-direction="bottom") Supprimer
+                md-icon.material-icons delete

@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 
 var RemoteSchema = new mongoose.Schema({
   name: String,
+  position: Number,
+  type: String,
   ip: String,
   buttons: [{
     code: String,
