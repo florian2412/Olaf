@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Remote from './remote.model';
+import livebox from '../../config/box/livebox';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -99,4 +100,8 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+export function liveboxKeys(req, res) {
+  return res.json(livebox);
 }

@@ -6,7 +6,6 @@ class AdminRemotesController {
   private socket: any;
   private $mdSidenav: any;
   private $mdDialog: any;
-  private $scope: any;
 
   private remotes: Object[];
   private newRemote: {
@@ -17,18 +16,22 @@ class AdminRemotesController {
 
   private selectedIndex: Number;
   private selectedRemote: any;
+  private useFullScreen: Boolean;
 
-  constructor(Remote, socket, $mdSidenav, $mdDialog, $scope) {
+  constructor(Remote, socket, $mdSidenav, $mdDialog, $scope, $mdMedia) {
     this.Remote = Remote;
     this.socket = socket.socket;
     this.$mdSidenav = $mdSidenav;
     this.$mdDialog = $mdDialog;
-    this.$scope = $scope;
-
-    this.remotes = this.Remote.query();
+    this.remotes = this.Remote.query(() => {
+      if (this.remotes.length) {
+        this.selectedRemote = this.remotes[0];
+      }
+    });
 
     this.initSocket();
     this.selectedIndex = 0;
+    this.useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
 
     $scope.$watch('adminRemotes.selectedIndex', (newIndex) => {
       this.selectedRemote = _.find(this.remotes, {position: newIndex});
@@ -79,12 +82,9 @@ class AdminRemotesController {
 
     remote.position = newPosition;
     remote.$update();
-
-    console.log('NEW POSITION ::::: ' + newPosition);
   }
 
   updateRemote(remote, ev) {
-    console.log(remote);
     var dialog = this.$mdDialog.prompt()
       .title('Renommer la télécommande')
       .placeholder('Nouveau nom')
@@ -119,6 +119,25 @@ class AdminRemotesController {
 
       remote.$remove();
     });
+  }
+
+  addButtonToRemote(ev) {
+    console.log(this.selectedRemote);
+    if (this.selectedRemote && this.selectedRemote.type === 'Livebox') {
+      console.log('wesh2');
+      this.$mdDialog.show({
+        controller: AdminLiveboxRemoteController,
+        controllerAs: 'adminLiveboxRemote',
+        templateUrl: 'app/admin/remote/adminLiveboxRemote.html',
+        parent: angular.element(document.body),
+        targetEvent: ev,
+        clickOutsideToClose: true,
+        fullscreen: this.useFullScreen,
+        locals: {
+          remote: this.selectedRemote
+        },
+      });
+    }
   }
 
 }

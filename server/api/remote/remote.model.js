@@ -12,10 +12,10 @@ var RemoteSchema = new mongoose.Schema({
     label: String,
     icon: String,
     color: String,
-    width: Number,
-    height: Number,
-    posX: Number,
-    posY: Number
+    sizeX: Number,
+    sizeY: Number,
+    row: Number,
+    col: Number
   }] 
 });
 

@@ -15,6 +15,7 @@
         "client/app/account/settings/settings.controller.ts",
         "client/app/admin/admin.controller.ts",
         "client/app/admin/admin.ts",
+        "client/app/admin/remote/adminLiveboxRemote.controller.ts",
         "client/app/admin/remote/adminRemotes.controller.ts",
         "client/app/admin/users/addUsers.controller.ts",
         "client/app/admin/users/adminUsers.controller.ts",
