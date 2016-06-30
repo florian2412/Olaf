@@ -11,6 +11,16 @@ class AdminLiveboxRemoteController {
     this.$mdDialog = $mdDialog;
     this.remote = remote;
   }
+
+  cancel() {
+    this.$mdDialog.cancel();
+  }
+
+  addButton(button) {
+    this.remote.buttons.push(button);
+    this.remote.$update();
+    this.$mdDialog.cancel();
+  }
 }
 
 angular.module('olafApp')

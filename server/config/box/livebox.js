@@ -4,7 +4,8 @@ module.exports = {
 
   keys: [{
     code: 116,
-    label: 'ON/OFF'
+    label: 'ON/OFF',
+    icon: 'power_settings_new'
   }, {
     code: 512,
     label: '0'
@@ -37,52 +38,67 @@ module.exports = {
     label: '9'
   }, {
     code: 402,
-    label: 'CH+'
+    label: 'CH+',
+    icon: 'add_to_queue'
   }, {
     code: 403,
-    label: 'CH-'
+    label: 'CH-',
+    icon: 'remove_from_queue'
   }, {
     code: 115,
-    label: 'VOL+'
+    label: 'VOL+',
+    icon: 'volume_up'
   }, {
     code: 114,
-    label: 'VOL-'
+    label: 'VOL-',
+    icon: 'volume_down'
   }, {
     code: 113,
-    label: 'MUTE'
+    label: 'MUTE',
+    icon: 'volume_mute'
   }, {
     code: 103,
-    label: 'UP'
+    label: 'UP',
+    icon: 'keyboard_arrow_up'
   }, {
     code: 108,
-    label: 'DOWN'
+    label: 'DOWN',
+    icon: 'keyboard_arrow_down'
   }, {
     code: 105,
-    label: 'LEFT'
+    label: 'LEFT',
+    icon: 'keyboard_arrow_left'
   }, {
     code: 116,
-    label: 'RIGHT'
+    label: 'RIGHT',
+    icon: 'keyboard_arrow_right'
   }, {
     code: 352,
     label: 'OK'
   }, {
     code: 158,
-    label: 'BACK'
+    label: 'BACK',
+    icon: 'keyboard_return'
   }, {
     code: 139,
-    label: 'MENU'
+    label: 'MENU',
+    icon: 'menu'
   }, {
     code: 164,
-    label: 'PLAY/PAUSE'
+    label: 'PLAY/PAUSE',
+    icon: 'play_arrow'
   }, {
     code: 168,
-    label: 'FBWD'
+    label: 'FBWD',
+    icon: 'fast_forward'
   }, {
     code: 159,
-    label: 'FFWD'
+    label: 'FFWD',
+    icon: 'fast_rewind'
   }, {
     code: 167,
-    label: 'REC'
+    label: 'REC',
+    icon: 'fiber_manual_record'
   }, {
     code: 393,
     label: 'VOD'

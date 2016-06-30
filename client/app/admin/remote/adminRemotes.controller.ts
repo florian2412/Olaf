@@ -122,9 +122,8 @@ class AdminRemotesController {
   }
 
   addButtonToRemote(ev) {
-    console.log(this.selectedRemote);
     if (this.selectedRemote && this.selectedRemote.type === 'Livebox') {
-      console.log('wesh2');
+      this.selectedRemote.$update();
       this.$mdDialog.show({
         controller: AdminLiveboxRemoteController,
         controllerAs: 'adminLiveboxRemote',
@@ -140,8 +139,21 @@ class AdminRemotesController {
     }
   }
 
+  saveChanges() {
+    angular.forEach(this.remotes, (remote) => {
+      remote.$update();
+    });
+  }
+
 }
 
 angular.module('olafApp')
   .controller('AdminRemotesController', AdminRemotesController);
+
+angular.module('olafApp')
+  .run(['gridsterConfig', (gridsterConfig) => {
+    gridsterConfig.columns = 12;
+    gridsterConfig.floating = false;
+    gridsterConfig.pushing = false;
+}]);
 
