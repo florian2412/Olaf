@@ -18,6 +18,15 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 - [Gulp](http://gulpjs.com/) (`npm install --global gulp`)
 - [MongoDB](https://www.mongodb.org/) - Keep a running daemon with `mongod`
 
+### Arduino
+
+Olaf work with Arduino Uno Boards. 
+This application is testing with this configuration : 
+
+First Arduino :
+- Arduino Uno CMS with Grove Base Shield
+- Upload [Configurable Firmata](https://github.com/firmata/ConfigurableFirmata) on the board
+
 ### Developing
 
 1. Run `npm install` to install server dependencies.
@@ -27,6 +36,8 @@ This project was generated with the [Angular Full-Stack Generator](https://githu
 3. Run `mongod` in a separate shell to keep an instance of the MongoDB Daemon running
 
 4. Run `gulp serve` to start the development server. It should automatically open the client in your browser when ready.
+
+On Windows, you can also start `start.bat` to run mongod and gulp. 
 
 ## Build & development
 
