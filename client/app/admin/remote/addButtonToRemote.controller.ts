@@ -1,13 +1,13 @@
 'use strict';
 
-class AdminLiveboxRemoteController {
+class AddButtonToRemoteController {
 
   private $mdDialog: any;
   private livebox: any;
   private remote: any;
 
   constructor(Remote, $mdDialog, remote) {
-    this.livebox = Remote.getLiveboxKeys();
+    this.livebox = Remote.getLiveboxButtons();
     this.$mdDialog = $mdDialog;
     this.remote = remote;
   }
@@ -16,7 +16,8 @@ class AdminLiveboxRemoteController {
     this.$mdDialog.cancel();
   }
 
-  addButton(button) {
+  addLiveboxButton(button) {
+    button.type = 'Livebox';
     this.remote.buttons.push(button);
     this.remote.$update();
     this.$mdDialog.cancel();
@@ -24,4 +25,4 @@ class AdminLiveboxRemoteController {
 }
 
 angular.module('olafApp')
-  .controller('AdminLiveboxRemoteController', AdminLiveboxRemoteController);
+  .controller('AddButtonToRemoteController', AddButtonToRemoteController);

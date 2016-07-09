@@ -2,21 +2,22 @@
 
 import mongoose from 'mongoose';
 
+var ButtonSchema = new mongoose.Schema({
+  type: String,
+  code: String,
+  label: String,
+  icon: String,
+  color: String,
+  sizeX: Number,
+  sizeY: Number,
+  row: Number,
+  col: Number
+});
+
 var RemoteSchema = new mongoose.Schema({
   name: String,
   position: Number,
-  type: String,
-  ip: String,
-  buttons: [{
-    code: String,
-    label: String,
-    icon: String,
-    color: String,
-    sizeX: Number,
-    sizeY: Number,
-    row: Number,
-    col: Number
-  }] 
+  buttons: [ButtonSchema]
 });
 
 export default mongoose.model('Remote', RemoteSchema);

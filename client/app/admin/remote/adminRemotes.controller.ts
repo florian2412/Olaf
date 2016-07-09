@@ -10,42 +10,32 @@ class AdminRemotesController {
   private remotes: Object[];
   private newRemote: {
     name: String,
-    type: String,
     position: Number,
   };
 
   private selectedIndex: Number;
-  private selectedRemote: any;
   private useFullScreen: Boolean;
 
-  constructor(Remote, socket, $mdSidenav, $mdDialog, $scope, $mdMedia) {
+  constructor(Remote, socket, $mdSidenav, $mdDialog, $mdMedia) {
     this.Remote = Remote;
     this.socket = socket.socket;
     this.$mdSidenav = $mdSidenav;
     this.$mdDialog = $mdDialog;
-    this.remotes = this.Remote.query(() => {
-      if (this.remotes.length) {
-        this.selectedRemote = this.remotes[0];
-      }
-    });
+
+    this.remotes = this.Remote.query();
 
     this.initSocket();
     this.selectedIndex = 0;
     this.useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
-
-    $scope.$watch('adminRemotes.selectedIndex', (newIndex) => {
-      this.selectedRemote = _.find(this.remotes, {position: newIndex});
-    });
   }
 
   initSocket() {
     this.socket.on('remote:save', (remote) => {
       var oldItem = _.find(this.remotes, {_id: remote._id});
-      var index = this.remotes.indexOf(oldItem);
       var remoteResource = new this.Remote(remote);
 
       if (oldItem) {
-        this.remotes.splice(index, 1, remoteResource);
+        _.merge(oldItem, remoteResource);
       } else {
         this.remotes.push(remoteResource);
       }
@@ -122,18 +112,21 @@ class AdminRemotesController {
   }
 
   addButtonToRemote(ev) {
-    if (this.selectedRemote && this.selectedRemote.type === 'Livebox') {
-      this.selectedRemote.$update();
+    var selectedRemote: any = _.find(this.remotes, {position: this.selectedIndex});
+
+    if (selectedRemote) {
+      selectedRemote.$update();
+
       this.$mdDialog.show({
-        controller: AdminLiveboxRemoteController,
-        controllerAs: 'adminLiveboxRemote',
-        templateUrl: 'app/admin/remote/adminLiveboxRemote.html',
+        controller: AddButtonToRemoteController,
+        controllerAs: 'addButtonToRemote',
+        templateUrl: 'app/admin/remote/addButtonToRemote.html',
         parent: angular.element(document.body),
         targetEvent: ev,
         clickOutsideToClose: true,
         fullscreen: this.useFullScreen,
         locals: {
-          remote: this.selectedRemote
+          remote: selectedRemote
         },
       });
     }
@@ -152,8 +145,10 @@ angular.module('olafApp')
 
 angular.module('olafApp')
   .run(['gridsterConfig', (gridsterConfig) => {
-    gridsterConfig.columns = 12;
+    gridsterConfig.columns = 6;
     gridsterConfig.floating = false;
     gridsterConfig.pushing = false;
+    gridsterConfig.isMobile = true;
+    gridsterConfig.mobileBreakPoint = 300;
 }]);
 

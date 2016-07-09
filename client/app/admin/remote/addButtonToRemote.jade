@@ -1,0 +1,17 @@
+md-dialog.addButtonDialog(aria-label="Ajout un bouton de type Livebox" ng-cloak)
+  md-toolbar
+    .md-toolbar-tools
+      h2 Ajouter un bouton à cette télécommande
+      span(flex)
+      md-button.md-icon-button(ng-click="addButtonToRemote.cancel()")
+        md-icon.material-icons close
+  md-tabs(md-dynamic-height md-border-bottom)
+    md-tab(label="livebox")
+      md-content.md-padding
+        md-grid-list(md-cols-gt-md="6" md-cols="2" md-cols-md="3" md-row-height-gt-md="1:1" md-row-height="4:3" md-gutter-gt-md="16px" md-gutter-md="8px" md-gutter="4px")
+          md-grid-tile.button(ng-repeat="button in addButtonToRemote.livebox.buttons" ng-click="addButtonToRemote.addLiveboxButton(button)")
+            div.label(ng-if="!button.icon") {{ button.label }}
+            md-icon.material-icons(ng-if="button.icon") {{ button.icon }}
+            md-tooltip(md-direction="bottom") {{ button.label }}
+    md-tab(label="IR")
+      md-content.md-padding

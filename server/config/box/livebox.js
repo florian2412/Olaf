@@ -2,8 +2,8 @@
 
 module.exports = {
 
-  keys: [{
-    code: 116,
+  buttons: [{
+    code: '116',
     label: 'ON/OFF',
     icon: 'power_settings_new'
   }, {

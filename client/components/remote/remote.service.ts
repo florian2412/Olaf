@@ -6,7 +6,7 @@ function RemoteResource($resource) {
   return $resource('/api/remotes/:id/:controller', {
     id: '@_id'
   }, {
-    getLiveboxKeys: {
+    getLiveboxButtons: {
       method: 'GET',
       params: {
         id: 'livebox'

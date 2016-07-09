@@ -11,13 +11,6 @@ md-content.md-padding
           input(type="text" name="remoteName" ng-model="adminRemotes.newRemote.name" required)
           div(ng-messages="addRemoteForm.remoteName.$error" role="alert")
             div(ng-message="required") Ce champ est obligatoire.
-        md-input-container(flex)
-          label Type
-          md-select(name="remoteType" ng-model="adminRemotes.newRemote.type" required)
-            md-option(value="IR") IR
-            md-option(value="Livebox") Livebox
-          div(ng-messages="addRemoteForm.remoteType.$error" role="alert")
-            div(ng-message="required") Ce champ est obligatoire.
         div
           md-button.md-raised(type="submit" ng-disabled="addRemoteForm.$invalid")
             span Ajouter
@@ -26,8 +19,6 @@ md-content.md-padding
         md-content
           md-toolbar
             .md-toolbar-tools
-              h2 Télécommande de type {{ remote.type }}
-              span(flex)
               md-button.md-fab.md-mini(aria-label="Reculer d'une position" ng-click="adminRemotes.backRemotePosition(remote)")
                 md-tooltip(md-direction="bottom") Reculer d'une position
                 md-icon.material-icons keyboard_arrow_left
