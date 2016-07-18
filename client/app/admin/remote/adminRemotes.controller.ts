@@ -2,19 +2,21 @@
 
 class AdminRemotesController {
 
-  private Remote: any;
-  private socket: any;
-  private $mdSidenav: any;
-  private $mdDialog: any;
+  Remote: any;
+  socket: any;
+  $mdSidenav: any;
+  $mdDialog: any;
 
-  private remotes: Object[];
-  private newRemote: {
+  remotes: Object[];
+  newRemote: {
     name: String,
     position: Number,
   };
 
-  private selectedIndex: Number;
-  private useFullScreen: Boolean;
+  selectedIndex: Number;
+  useFullScreen: Boolean;
+
+  gridsterOpts: any;
 
   constructor(Remote, socket, $mdSidenav, $mdDialog, $mdMedia) {
     this.Remote = Remote;
@@ -27,6 +29,8 @@ class AdminRemotesController {
     this.initSocket();
     this.selectedIndex = 0;
     this.useFullScreen = ($mdMedia('sm') || $mdMedia('xs'));
+
+    this.initGridster();
   }
 
   initSocket() {
@@ -46,27 +50,37 @@ class AdminRemotesController {
     });
   }
 
-  addRemote(form) {
+  initGridster() {
+    this.gridsterOpts = {
+      columns: 6,
+      floating: false,
+      pushing: false,
+      isMobile: true,
+      mobileBreakPoint: 300
+    };
+  }
+
+  addRemote(form: any) {
     if (form.$valid) {
       this.newRemote.position = this.remotes.length;
       this.Remote.save(this.newRemote);
     }
   }
 
-  backRemotePosition(remote) {
+  backRemotePosition(remote: any) {
     if (remote.position > 0) {
       this.permuteRemote(remote, remote.position - 1);
     }
   }
 
-  nextRemotePosition(remote) {
+  nextRemotePosition(remote: any) {
     if (remote.position < this.remotes.length - 1) {
       this.permuteRemote(remote, remote.position + 1);
     }
   }
 
   permuteRemote(remote, newPosition) {
-    var permutedItem = _.find(this.remotes, {position: newPosition});
+    var permutedItem: any = _.find(this.remotes, {position: newPosition});
     permutedItem.position = remote.position;
     permutedItem.$update();
 
@@ -75,7 +89,7 @@ class AdminRemotesController {
   }
 
   updateRemote(remote, ev) {
-    var dialog = this.$mdDialog.prompt()
+    var dialog: any = this.$mdDialog.prompt()
       .title('Renommer la télécommande')
       .placeholder('Nouveau nom')
       .ariaLabel('Nouveau nom')
@@ -92,7 +106,7 @@ class AdminRemotesController {
   }
 
   deleteRemote(remote, ev) {
-    var dialog = this.$mdDialog.confirm()
+    var dialog: any = this.$mdDialog.confirm()
       .title('Demande de confirmation')
       .textContent('Êtes vous sûr de vouloir supprimer cette télécommande ?')
       .targetEvent(ev)
@@ -100,7 +114,7 @@ class AdminRemotesController {
       .cancel('Non');
 
     this.$mdDialog.show(dialog).then(() => {
-      angular.forEach(this.remotes, (currentRemote) => {
+      angular.forEach(this.remotes, (currentRemote: any) => {
         if (currentRemote.position > remote.position) {
           currentRemote.position = currentRemote.position - 1;
           currentRemote.$update();
@@ -133,8 +147,27 @@ class AdminRemotesController {
   }
 
   saveChanges() {
-    angular.forEach(this.remotes, (remote) => {
+    angular.forEach(this.remotes, (remote: any) => {
       remote.$update();
+    });
+  }
+
+  configButton(button, ev) {
+    var selectedRemote: any = _.find(this.remotes, {position: this.selectedIndex});
+    this.$mdDialog.show({
+      controller: ConfigButtonController,
+      controllerAs: 'configButton',
+      templateUrl: 'app/admin/remote/configButton.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+      fullscreen: this.useFullScreen,
+      locals: {
+        button: button,
+        remote: selectedRemote
+      },
+    }).finally(() => {
+      selectedRemote.$update();
     });
   }
 
@@ -142,13 +175,3 @@ class AdminRemotesController {
 
 angular.module('olafApp')
   .controller('AdminRemotesController', AdminRemotesController);
-
-angular.module('olafApp')
-  .run(['gridsterConfig', (gridsterConfig) => {
-    gridsterConfig.columns = 6;
-    gridsterConfig.floating = false;
-    gridsterConfig.pushing = false;
-    gridsterConfig.isMobile = true;
-    gridsterConfig.mobileBreakPoint = 300;
-}]);
-
