@@ -4,16 +4,14 @@
 class MainController {
 
   Remote: any;
-  socket: any;
-
+  livebox: any;
   gridsterOpts: any;
 
   remotes: Object[];
 
-  constructor(Remote, socket) {
+  constructor(Remote, livebox) {
     this.Remote = Remote;
-    this.socket = socket;
-
+    this.livebox = livebox;
     this.remotes = this.Remote.query();
 
     this.initGridster();
@@ -33,6 +31,24 @@ class MainController {
        enabled: false,
       }
     };
+  }
+
+  onClick(button: any) {
+    if (button.type = 'Livebox') {
+      this.livebox.click(button.code);
+    }
+  }
+
+  onLongPress(button: any) {
+    if (button.type = 'Livebox') {
+      this.livebox.longPress(button.code);
+    }
+  }
+
+  onTouchEnd(button: any) {
+    if (button.type = 'Livebox') {
+      this.livebox.touchEnd(button.code);
+    }
   }
 
 }

@@ -3,7 +3,7 @@
 module.exports = {
 
   buttons: [{
-    code: '116',
+    code: 116,
     label: 'ON/OFF',
     icon: 'power_settings_new'
   }, {
@@ -69,7 +69,7 @@ module.exports = {
     label: 'LEFT',
     icon: 'keyboard_arrow_left'
   }, {
-    code: 116,
+    code: 106,
     label: 'RIGHT',
     icon: 'keyboard_arrow_right'
   }, {

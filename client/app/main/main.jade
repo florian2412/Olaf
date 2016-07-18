@@ -4,7 +4,7 @@ md-content.md-padding
       md-content
         .remote-content(gridster="main.gridsterOpts")
           ul
-            li.button(gridster-item="button" ng-repeat="button in remote.buttons" ng-style="button.style")
+            li.button(gridster-item="button" ng-repeat="button in remote.buttons" ng-style="button.style" ng-click="main.onClick(button)" on-long-press="main.onLongPress(button)" on-touch-end="main.onTouchEnd(button)")
               div.content
                 div.label(ng-if="!button.icon" layout-align="center center") {{ button.label }}
                 md-icon.material-icons(ng-if="button.icon" ng-style="button.style") {{ button.icon }}
