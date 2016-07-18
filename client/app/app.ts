@@ -16,7 +16,8 @@ angular.module('olafApp', [
   'ngMessages',
   'md.data.table',
   'ngMaterialDatePicker',
-  'gridster'
+  'gridster',
+  'mdColorPicker',
 ])
 
 .config(function($urlRouterProvider, $locationProvider) {

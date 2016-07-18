@@ -2,16 +2,36 @@
 
 import mongoose from 'mongoose';
 
+var StyleSchema = new mongoose.Schema({
+  color: {
+    type: String,
+    required: true
+  },
+  backgroundColor: {
+    type: String,
+    required: true
+  }
+});
+
 var ButtonSchema = new mongoose.Schema({
-  type: String,
-  code: String,
+  type: {
+    type: String,
+    required: true
+  },
+  code: {
+    type: String,
+    required: true
+  },
   label: String,
   icon: String,
-  color: String,
   sizeX: Number,
   sizeY: Number,
   row: Number,
-  col: Number
+  col: Number,
+  style: {
+    type: StyleSchema,
+    required: true
+  }
 });
 
 var RemoteSchema = new mongoose.Schema({

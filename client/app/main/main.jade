@@ -1,22 +1,10 @@
-header#banner.hero-unit
-  .container
-    h1 'Allo, 'Allo!
-    p.lead Kick-start your next web app with Angular Fullstack
-    img(src='assets/images/yeoman.png', alt='I\'m Yeoman')
-
-.container
-  .row
-    .col-lg-12
-      h1.page-header Features:
-      ul.nav.nav-tabs.nav-stacked.col-md-4.col-lg-4.col-sm-6(ng-repeat='thing in $ctrl.awesomeThings')
-        li
-          a(href='#', uib-tooltip='{{thing.info}}')
-            | {{thing.name}}
-            button.close(type='button', ng-click='$ctrl.deleteThing(thing)') &times;
-
-  form.thing-form
-    label Syncs in realtime across clients
-    p.input-group
-      input.form-control(type='text', placeholder='Add a new thing here.', ng-model='$ctrl.newThing')
-      span.input-group-btn
-        button.btn.btn-primary(type='submit', ng-click='$ctrl.addThing()') Add New
+md-content.md-padding
+  md-tabs(md-dynamic-height md-border-bottom ng-if="main.remotes.length")
+    md-tab(ng-repeat="remote in main.remotes | orderBy:'position'" label="{{remote.name}}")
+      md-content
+        .remote-content(gridster="main.gridsterOpts")
+          ul
+            li.button(gridster-item="button" ng-repeat="button in remote.buttons" ng-style="button.style")
+              div.content
+                div.label(ng-if="!button.icon" layout-align="center center") {{ button.label }}
+                md-icon.material-icons(ng-if="button.icon" ng-style="button.style") {{ button.icon }}

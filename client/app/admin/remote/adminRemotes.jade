@@ -31,11 +31,11 @@ md-content.md-padding
               md-button.md-fab.md-mini(aria-label="Supprimer" ng-click="adminRemotes.deleteRemote(remote, $event)")
                 md-tooltip(md-direction="bottom") Supprimer
                 md-icon.material-icons delete
-          .remote-content(gridster)
+          .remote-content(gridster="adminRemotes.gridsterOpts")
             ul
-              li.button(gridster-item="button" ng-repeat="button in remote.buttons")
-                div.gridster-content
-                  div.label(ng-if="!button.icon") {{ button.label }}
-                  md-icon.material-icons(ng-if="button.icon") {{ button.icon }}
+              li.button(gridster-item="button" ng-repeat="button in remote.buttons" ng-dblclick="adminRemotes.configButton(button, $event)" ng-style="button.style")
+                div.content
+                  div.label(ng-if="!button.icon" layout-align="center center") {{ button.label }}
+                  md-icon.material-icons(ng-if="button.icon" ng-style="button.style") {{ button.icon }}
     section(layout="row" layout-align="center center" layout-wrap)
       md-button.md-raised(ng-click="adminRemotes.saveChanges()") Sauvegarder

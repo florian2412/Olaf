@@ -1,0 +1,42 @@
+md-dialog(aria-label="Ajout un bouton de type Livebox" ng-cloak)
+  md-toolbar
+    .md-toolbar-tools
+      h2 Configuration du bouton
+      span(flex)
+      md-button.md-icon-button(ng-click="configButton.cancel()")
+        md-icon.material-icons close
+   md-content.md-padding
+    #preview-button
+      #preview-button-content
+        .button(ng-style="configButton.button.style")
+          .content
+            div.label(ng-if="!configButton.button.icon") {{ configButton.button.label }}
+            md-icon.material-icons(ng-if="configButton.button.icon" ng-style="configButton.button.style") {{ configButton.button.icon }}
+    form(name="configButtonForm" no-validate)
+      div(layout="row")
+        md-input-container(flex)
+          label Label
+          input(type="text" name="label" ng-model="configButton.button.label")
+        md-input-container(flex)
+          label Icon
+          input(type="text" name="label" ng-model="configButton.button.icon")
+      div(layout="row")
+        md-input-container(flex)
+          label Couleur de fond
+          div(md-color-picker ng-model="configButton.button.style.backgroundColor")
+        md-input-container(flex)
+          label Couleur du texte
+          div(md-color-picker ng-model="configButton.button.style.color")
+      div(layout="row" layout-align="center center" ng-hide="configButton.confirmDelete")
+        md-button.md-raised(ng-click="configButton.showConfirmDelete()")
+          span Supprimer
+        md-button.md-raised(ng-click="configButton.cancel()")
+          span Modifier
+      div(layout="row" layout-align="center center" ng-show="configButton.confirmDelete")
+        md-card.md-padding
+          p Etes vous sûr de vouloir supprimer ce bouton ?
+          div(layout="row" layout-align="center center")
+            md-button.md-raised(ng-click="configButton.deleteButton($event)")
+              span Oui
+            md-button.md-raised(ng-click="configButton.hideConfirmDelete()")
+              span Non

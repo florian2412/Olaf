@@ -1,42 +1,41 @@
 'use strict';
 
-(function() {
 
 class MainController {
 
-  constructor($http, $scope, socket) {
-    this.$http = $http;
+  Remote: any;
+  socket: any;
+
+  gridsterOpts: any;
+
+  remotes: Object[];
+
+  constructor(Remote, socket) {
+    this.Remote = Remote;
     this.socket = socket;
-    this.awesomeThings = [];
 
-    $scope.$on('$destroy', function() {
-      socket.unsyncUpdates('thing');
-    });
+    this.remotes = this.Remote.query();
+
+    this.initGridster();
   }
 
-  $onInit() {
-    this.$http.get('/api/things').then(response => {
-      this.awesomeThings = response.data;
-      this.socket.syncUpdates('thing', this.awesomeThings);
-    });
+  initGridster() {
+    this.gridsterOpts = {
+      columns: 6,
+      floating: false,
+      pushing: false,
+      isMobile: true,
+      mobileBreakPoint: 300,
+      resizable: {
+        enabled: false,
+      },
+      draggable: {
+       enabled: false,
+      }
+    };
   }
 
-  addThing() {
-    if (this.newThing) {
-      this.$http.post('/api/things', { name: this.newThing });
-      this.newThing = '';
-    }
-  }
-
-  deleteThing(thing) {
-    this.$http.delete('/api/things/' + thing._id);
-  }
 }
 
 angular.module('olafApp')
-  .component('main', {
-    templateUrl: 'app/main/main.html',
-    controller: MainController
-  });
-
-})();
+  .controller('MainController', MainController);

@@ -5,6 +5,9 @@ angular.module('olafApp')
     $stateProvider
       .state('main', {
         url: '/',
-        authenticate: true
+        authenticate: true,
+        templateUrl: 'app/main/main.html',
+        controller: 'MainController',
+        controllerAs: 'main'
       });
   });

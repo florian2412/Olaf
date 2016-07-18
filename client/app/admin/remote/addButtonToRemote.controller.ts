@@ -16,8 +16,12 @@ class AddButtonToRemoteController {
     this.$mdDialog.cancel();
   }
 
-  addLiveboxButton(button) {
+  addLiveboxButton(button, ev) {
     button.type = 'Livebox';
+    button.style = {
+      color: '#616161',
+      backgroundColor: '#FFFFFF'
+    };
     this.remote.buttons.push(button);
     this.remote.$update();
     this.$mdDialog.cancel();
