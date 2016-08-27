@@ -90,11 +90,11 @@ module.exports = {
   }, {
     code: 168,
     label: 'FBWD',
-    icon: 'fast_forward'
+    icon: 'fast_rewind'
   }, {
     code: 159,
     label: 'FFWD',
-    icon: 'fast_rewind'
+    icon: 'fast_forward'
   }, {
     code: 167,
     label: 'REC',
