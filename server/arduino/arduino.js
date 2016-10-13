@@ -5,6 +5,11 @@ import Weather from '../api/weather/weather.model'
 
 var Board = new five.Board();
 
+/**
+ * Init function for arduino board
+ * 
+ * @export
+ */
 export function init() {
   Board.on('ready', function () {
 
@@ -47,6 +52,13 @@ export function init() {
   });
 }
 
+
+/**
+ * Save Weather object in database
+ * 
+ * @param {any} type
+ * @param {any} value
+ */
 function saveWeather(type, value) {
   new Weather({
     date: new Date(),
@@ -55,6 +67,12 @@ function saveWeather(type, value) {
   }).save();
 }
 
+/**
+ * Round value to 1 digit
+ * 
+ * @param {any} value
+ * @returns int round value
+ */
 function round(value) {
   return Math.round(value * 10) / 10
 }
